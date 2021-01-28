@@ -10,7 +10,7 @@ module.exports = {
       filename: 'bundle.js'
     },
     resolve: {
-      extensions: ['.ts', '.tsx', '.js'], // extensões que serão dado suporte 
+      extensions: ['.ts', '.tsx', '.js', 'scss'], // extensões que serão dado suporte 
       alias: {
         '@': path.join(__dirname, '/src') // faz com que o react entenda como estão feitos os imports
       },
@@ -18,6 +18,27 @@ module.exports = {
         contentBase: './public', // inicializar o server a partir da pasta public
         writeToDisk: true,
         historyApiFallback: true // permite rotear tudo
+      },
+      module: {
+        rules:[{
+          test: /\.ts(x?)$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/
+        }, {
+          test: /\.scss$/
+          use: [{
+            loader: 'style-loader',            
+          },
+          {
+            loader: 'css-loader', 
+            options: {
+              modules: true // para acessar classes criadas através do js
+            }           
+          },
+          {
+            loader: 'sass-loader',            
+          }]
+        }]
       },
       externals: {
         // tudo dentro do externals, webpack não coloca no bundle
