@@ -13,19 +13,15 @@ module.exports = {
       extensions: ['.ts', '.tsx', '.js', 'scss'], // extensões que serão dado suporte 
       alias: {
         '@': path.join(__dirname, '/src') // faz com que o react entenda como estão feitos os imports
-      },
-      devServer: {
-        contentBase: './public', // inicializar o server a partir da pasta public
-        writeToDisk: true,
-        historyApiFallback: true // permite rotear tudo
-      },
-      module: {
-        rules:[{
-          test: /\.ts(x?)$/,
-          loader: 'ts-loader',
-          exclude: /node_modules/
-        }, {
-          test: /\.scss$/
+      }
+    },
+    module: {
+      rules:[{
+        test: /\.ts(x?)$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
+      }, {
+          test: /\.scss$/,
           use: [{
             loader: 'style-loader',            
           },
@@ -39,12 +35,17 @@ module.exports = {
             loader: 'sass-loader',            
           }]
         }]
-      },
-      externals: {
+    },
+    devServer: {
+      contentBase: './public', // inicializar o server a partir da pasta public
+      writeToDisk: true,
+      historyApiFallback: true // permite rotear tudo
+    },
+    
+    externals: {
         // tudo dentro do externals, webpack não coloca no bundle
-        react: 'React',
-        'react-dom': 'ReactDOM' 
-      }
+      react: 'React',
+      'react-dom': 'ReactDOM' 
     },
     plugins:[
       new CleanWebpackPlugin()
