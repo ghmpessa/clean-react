@@ -1,4 +1,3 @@
-import { FieldValidation } from '../protocols/field-validation'
 import { FieldValidationSpy } from '../test/mock-field-validation'
 import { ValidationComposite } from './validation-composite'
 import faker from 'faker'
