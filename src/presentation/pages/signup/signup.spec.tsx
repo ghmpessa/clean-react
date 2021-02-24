@@ -20,7 +20,6 @@ const makeSut = (params?: SutParams): SutTypes => {
       <SignUp
       validation={ validationStub }
       />
-
   )
   return {
     sut
@@ -35,11 +34,6 @@ const simulateValidSubmit = async (sut: RenderResult, name = faker.name.findName
   const form = sut.getByTestId('form')
   fireEvent.submit(form)
   await waitFor(() => form)
-}
-
-const testElementExists = (sut: RenderResult, fieldName: string): void => {
-  const el = sut.getByTestId(fieldName)
-  expect(el).toBeTruthy()
 }
 
 describe('SignUp Component', () => {
@@ -123,6 +117,6 @@ describe('SignUp Component', () => {
   test('Should show spinner if submit', async () => {
     const { sut } = makeSut()
     await simulateValidSubmit(sut)
-    testElementExists(sut, 'spinner')
+    Helper.testElementExists(sut, 'spinner')
   })
 })
