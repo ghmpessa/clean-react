@@ -21,9 +21,9 @@ const history = createMemoryHistory({ initialEntries: ['/login'] })
 
 const makeSut = (params?: SutParams): SutTypes => {
   const validationStub = new ValidationStub()
+  validationStub.errorMessage = params?.validationError
   const authenticationSpy = new AuthenticationSpy()
   const saveAccessTokenMock = new SaveAccessTokenMock()
-  validationStub.errorMessage = params?.validationError
   const sut = render(
     <Router history={history}>
       <Login
@@ -83,7 +83,7 @@ describe('Login Component', () => {
     Helper.testStatusForField(sut, 'password', validationError)
   })
 
-  test('Should show correct email error when Validation fails', () => {
+  test('Should show correct email error if Validation fails', () => {
     const validationError = faker.random.words()
     const { sut } = makeSut({ validationError })
     populateEmailField(sut)
