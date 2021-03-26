@@ -64,6 +64,23 @@ describe('Login', () => {
     cy.url().should('eql', `${baseUrl}/login`)
   })
 
+  it('Should present UnexpectedError on 400', () => {
+    cy.route({
+      method: 'POST',
+      url: /login/,
+      status: 400,
+      response: {
+        error: faker.random.words()
+      }
+    })
+    cy.getByTestId('email').focus().type(faker.internet.email())
+    cy.getByTestId('password').focus().type(faker.internet.password())
+    cy.getByTestId('submit').click()
+    cy.getByTestId('spinner').should('not.exist')
+    cy.getByTestId('main-error').should('contain.text', 'Algo de errado aconteceu. Tente novamente mais tarde.')
+    cy.url().should('eql', `${baseUrl}/login`)
+  })
+
   it('Should save accessToken if valid credentials are provided', () => {
     cy.getByTestId('email').focus().type('mango@gmail.com')
     cy.getByTestId('password').focus().type('12345')
