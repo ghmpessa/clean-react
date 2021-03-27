@@ -61,13 +61,10 @@ describe('Login', () => {
   })
 
   it('Should save accessToken if valid credentials are provided', () => {
-    cy.getByTestId('email').focus().type('mango@gmail.com')
-    cy.getByTestId('password').focus().type('12345')
-    cy.getByTestId('submit').click()
-    cy.getByTestId('error-wrap')
-      .getByTestId('spinner').should('exist')
+    Http.mockOk()
+    simulateValidSubmit()
     cy.getByTestId('error-wrap').should('not.have.descendants')
-    FormHelper.testUrl('/login')
+    FormHelper.testUrl('/')
     FormHelper.testLocalStorageItem('accessToken')
   })
 
