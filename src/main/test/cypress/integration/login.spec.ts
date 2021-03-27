@@ -50,7 +50,7 @@ describe('Login', () => {
     Http.mockUnexpectedError()
     simulateValidSubmit()
     FormHelper.testMainError('Algo de errado aconteceu. Tente novamente mais tarde.')
-    FormHelper.testUrl('signup')
+    FormHelper.testUrl('/login')
   })
 
   it('Should present UnexpectedError if invalid data is returned', () => {
@@ -58,7 +58,6 @@ describe('Login', () => {
     simulateValidSubmit()
     FormHelper.testMainError('Algo de errado aconteceu. Tente novamente mais tarde.')
     FormHelper.testUrl('/login')
-    FormHelper.testLocalStorageItem('accessToken')
   })
 
   it('Should save accessToken if valid credentials are provided', () => {
