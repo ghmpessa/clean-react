@@ -35,7 +35,7 @@ describe('LocalSaveAccessToken', () => {
   })
 
   test('Should throw if accessToken is falsy', async () => {
-    const { sut, setStorageMock } = makeSut()
+    const { sut } = makeSut()
     const promise = sut.save(undefined)
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
