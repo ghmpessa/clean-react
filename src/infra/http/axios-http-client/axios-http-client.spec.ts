@@ -31,13 +31,17 @@ describe('AxiosHttpClient', () => {
 
     // Estamos comparando uma promise com outra promise, por isso retiramos o async da função
     // e o await da variável
-    test('Should call correct response on axios.post', () => {
+    test('Should call correct response on axios.post', async () => {
       const { sut, mockedAxios } = makeSut()
-      const promise = sut.post(mockPostRequest())
-      expect(promise).toEqual(mockedAxios.post.mock.results[0].value) // results[0]: resolved
+      const httpResponse = await sut.post(mockGetRequest())
+      const axiosResponse = await mockedAxios.post.mock.results[0].value // results[0]: resolved
+      expect(httpResponse).toEqual({
+        statusCode: axiosResponse.status,
+        body: axiosResponse.data
+      })
     })
 
-    test('Should call correct correct error on axios.post', () => {
+    test('Should call correct error on axios.post', () => {
       const { sut, mockedAxios } = makeSut()
       mockedAxios.post.mockRejectedValueOnce({
         response: mockHttpResponse()
