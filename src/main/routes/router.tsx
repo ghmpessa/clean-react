@@ -8,7 +8,7 @@ import { setCurrentAccountAdapter } from '../adapters/current-account-adapter'
 
 const Router: React.FC = () => {
   return (
-     <ApiContext.Provider
+    <ApiContext.Provider
       value={{
         setCurrentAccount: setCurrentAccountAdapter
       }}>
@@ -19,7 +19,7 @@ const Router: React.FC = () => {
           <Route path="/" exact component={SurveyList}/>
         </Switch>
       </BrowserRouter>
-      </ApiContext.Provider>
+    </ApiContext.Provider>
   )
 }
 
