@@ -1,13 +1,13 @@
 import React from 'react'
-import { createMemoryHistory } from 'history'
-import { ValidationStub, AuthenticationSpy, Helper } from '@/presentation/test'
+import { Router } from 'react-router-dom'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
 import { InvalidCredentialsError } from '@/domain/errors'
-import { Login } from '@/presentation/pages'
-import { Router } from 'react-router-dom'
-import faker from 'faker'
-import { ApiContext } from '@/presentation/contexts'
 import { AccountModel } from '@/domain/models'
+import { Login } from '@/presentation/pages'
+import { ApiContext } from '@/presentation/contexts'
+import { ValidationStub, AuthenticationSpy, Helper } from '@/presentation/test'
+import { createMemoryHistory } from 'history'
+import faker from 'faker'
 
 type SutTypes = {
   authenticationSpy: AuthenticationSpy

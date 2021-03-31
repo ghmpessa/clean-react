@@ -1,13 +1,13 @@
 import React from 'react'
-import { createMemoryHistory } from 'history'
+import { Router } from 'react-router-dom'
 import { render, fireEvent, waitFor, screen } from '@testing-library/react'
+import { EmailInUseError } from '@/domain/errors'
+import { AccountModel } from '@/domain/models'
 import { ApiContext } from '@/presentation/contexts'
 import { AddAccountSpy, Helper, ValidationStub } from '@/presentation/test'
-import { EmailInUseError } from '@/domain/errors'
-import { Router } from 'react-router-dom'
 import { SignUp } from '@/presentation/pages'
+import { createMemoryHistory } from 'history'
 import faker from 'faker'
-import { AccountModel } from '@/domain/models'
 
 type SutTypes = {
   addAccountSpy: AddAccountSpy
