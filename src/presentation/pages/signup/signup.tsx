@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import Styles from './signup-styles.scss'
 import { Footer, Input, LoginHeader, FormStatus, SubmitButton } from '@/presentation/components'
-import { FormContext, ApiContext} from '@/presentation/contexts'
+import { FormContext, ApiContext } from '@/presentation/contexts'
 import { Validation } from '@/presentation/protocols/validation'
 import { AddAccount } from '@/domain/usecases'
 import { Link, useHistory } from 'react-router-dom'
