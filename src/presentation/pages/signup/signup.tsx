@@ -48,10 +48,10 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
         return
       }
 
-      setState({
-        ...state,
+      setState(old => ({
+        ...old,
         isLoading: true
-      })
+      }))
 
       const account = await addAccount.add({
         name: state.name,
@@ -64,11 +64,11 @@ const SignUp: React.FC<Props> = ({ validation, addAccount }: Props) => {
 
       history.replace('/')
     } catch (error) {
-      setState({
-        ...state,
+      setState(old => ({
+        ...old,
         isLoading: false,
         mainError: error.message
-      })
+      }))
     }
   }
 
