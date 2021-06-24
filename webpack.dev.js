@@ -1,21 +1,10 @@
-const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const { DefinePlugin } = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const common = require('./webpack.common')
+const { merge } = require('webpack-merge')
 
-module.exports = {
+module.exports = merge(common, {
   mode: 'development',
-  entry: './src/main/index.tsx', // a partir de onde gero o meu bundle
-  output: { // outuput é onde vamos gerar o bundle
-    path: path.join(__dirname, 'public/js'),
-    publicPath: '/public/js',
-    filename: 'bundle.js'
-  },
-  resolve: {
-    extensions: ['.ts', '.tsx', '.js', 'scss'], // extensões que serão dado suporte
-    alias: {
-      '@': path.join(__dirname, '/src') // faz com que o react entenda como estão feitos os imports
-    }
-  },
   module: {
     rules: [{
       test: /\.ts(x?)$/,
@@ -42,16 +31,12 @@ module.exports = {
     writeToDisk: true,
     historyApiFallback: true // permite rotear tudo
   },
-
-  externals: {
-    // tudo dentro do externals, webpack não coloca no bundle
-    react: 'React',
-    'react-dom': 'ReactDOM'
-  },
   plugins: [
-    new CleanWebpackPlugin(),
     new DefinePlugin({
       'process.env.API_URL': JSON.stringify('http://fordevs.herokuapp.com/api')
+    }),
+    new HtmlWebpackPlugin({
+      template: './template.dev.html'
     })
   ]
-}
+})
