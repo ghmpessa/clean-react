@@ -5,7 +5,6 @@ module.exports = {
   entry: './src/main/index.tsx', // a partir de onde gero o meu bundle
   output: { // outuput é onde vamos gerar o bundle
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist',
     filename: 'main-bundle-[hash].js'
   },
   resolve: {
