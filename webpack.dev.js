@@ -30,7 +30,8 @@ module.exports = merge(common, {
   devServer: {
     contentBase: './public', // inicializar o server a partir da pasta public
     writeToDisk: true,
-    historyApiFallback: true // permite rotear tudo
+    historyApiFallback: true, // permite rotear tudo
+    port: 8080
   },
   plugins: [
     new DefinePlugin({
