@@ -25,12 +25,12 @@ describe('SurveyItem Component', () => {
   test('Should render with correct values', () => {
     const survey = Object.assign(mockSurveyModel(), {
       didAnswer: false,
-      date: new Date('2020-01-10T00:00:00')
+      date: new Date('2021-08-08:00:00')
     })
     makeSut(survey)
     expect(screen.getByTestId('icon')).toHaveProperty('src', IconName.thumbDown)
     expect(screen.getByTestId('question')).toHaveTextContent(survey.question)
-    expect(screen.getByTestId('day')).toHaveTextContent('02')
+    expect(screen.getByTestId('day')).toHaveTextContent('08')
     expect(screen.getByTestId('month')).toHaveTextContent('ago')
     expect(screen.getByTestId('year')).toHaveTextContent('2021')
   })
