@@ -31,7 +31,9 @@ module.exports = merge(common, {
   externals: {
     // tudo dentro do externals, webpack não coloca no bundle
     react: 'React',
-    'react-dom': 'ReactDOM'
+    axios: 'axios',
+    'react-dom': 'ReactDOM',
+    'react-router-dom': 'ReactRouterDOM'
   },
   plugins: [
     new DefinePlugin({
