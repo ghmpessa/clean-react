@@ -26,6 +26,7 @@ module.exports = merge(common, {
       }]
     }]
   },
+  devtool: 'inline-source-map',
   devServer: {
     contentBase: './public', // inicializar o server a partir da pasta public
     writeToDisk: true,
