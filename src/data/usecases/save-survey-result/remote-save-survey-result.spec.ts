@@ -34,4 +34,14 @@ describe('RemoteSaveSurveyResult', () => {
     expect(httpClientSpy.method).toBe('put')
     expect(httpClientSpy.body).toEqual(saveSurveyResultParams)
   })
+
+  test('should throw AccessDeniedError if HttpClient returns 403', async () => {
+    const { sut, httpClientSpy } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.forbidden
+    }
+    const saveSurveyResultParams = mockSaveSurveyResultParams()
+    const promise = sut.save(saveSurveyResultParams)
+    await expect(promise).rejects.toThrow(new AccessDeniedError())
+  })
 })
