@@ -44,4 +44,14 @@ describe('RemoteSaveSurveyResult', () => {
     const promise = sut.save(saveSurveyResultParams)
     await expect(promise).rejects.toThrow(new AccessDeniedError())
   })
+
+  test('should throw UnexpectedError if HttpClient returns 404', async () => {
+    const { sut, httpClientSpy } = makeSut()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.notFound
+    }
+    const saveSurveyResultParams = mockSaveSurveyResultParams()
+    const promise = sut.save(saveSurveyResultParams)
+    await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
 })
