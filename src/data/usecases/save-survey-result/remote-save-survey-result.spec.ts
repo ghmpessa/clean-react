@@ -40,8 +40,7 @@ describe('RemoteSaveSurveyResult', () => {
     httpClientSpy.response = {
       statusCode: HttpStatusCode.forbidden
     }
-    const saveSurveyResultParams = mockSaveSurveyResultParams()
-    const promise = sut.save(saveSurveyResultParams)
+    const promise = sut.save(mockSaveSurveyResultParams())
     await expect(promise).rejects.toThrow(new AccessDeniedError())
   })
 
@@ -50,8 +49,7 @@ describe('RemoteSaveSurveyResult', () => {
     httpClientSpy.response = {
       statusCode: HttpStatusCode.notFound
     }
-    const saveSurveyResultParams = mockSaveSurveyResultParams()
-    const promise = sut.save(saveSurveyResultParams)
+    const promise = sut.save(mockSaveSurveyResultParams())
     await expect(promise).rejects.toThrow(new UnexpectedError())
   })
 
@@ -60,8 +58,22 @@ describe('RemoteSaveSurveyResult', () => {
     httpClientSpy.response = {
       statusCode: HttpStatusCode.serverError
     }
-    const saveSurveyResultParams = mockSaveSurveyResultParams()
-    const promise = sut.save(saveSurveyResultParams)
+    const promise = sut.save(mockSaveSurveyResultParams())
     await expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test('should return a SurveyResult on 200', async () => {
+    const { sut, httpClientSpy } = makeSut()
+    const httpResult = mockRemoteSurveyResultModel()
+    httpClientSpy.response = {
+      statusCode: HttpStatusCode.ok,
+      body: httpResult
+    }
+    const httpResponse = await sut.save(mockSaveSurveyResultParams())
+    expect(httpResponse).toEqual({
+      question: httpResult.question,
+      answers: httpResult.answers,
+      date: new Date(httpResult.date)
+    })
   })
 })
